@@ -39,8 +39,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                         loginModel.registerUser(name, familyName, fatherName, email, vk, telegram, fb, skype, twitter))
                 .subscribeOn(config.ioScheduler())
                 .observeOn(config.uiScheduler())
-                .subscribe(success -> executeIfViewBound(view -> view.onRegistered()),
-                        error -> executeIfViewBound(view -> view.onFailedToRegister(error)));
+                .subscribe(
+                        success -> executeIfViewBound(view -> view.onRegistered()),
+                        error -> executeIfViewBound(view -> view.onFailedToRegister(error))
+                );
         unsubscribeOnUnbindView(subscription);
     }
 
