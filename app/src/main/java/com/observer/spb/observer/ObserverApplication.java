@@ -8,6 +8,8 @@ import com.observer.spb.observer.data.api.ApiModule;
 import com.observer.spb.observer.data.info.InfoModule;
 import com.observer.spb.observer.data.local.LocalStorageModule;
 
+import timber.log.Timber;
+
 public class ObserverApplication extends Application {
 
     @NonNull
@@ -27,6 +29,10 @@ public class ObserverApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         applicationComponent = DaggerApplicationComponent.builder()
                 .apiModule(new ApiModule())

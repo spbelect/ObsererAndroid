@@ -10,7 +10,7 @@ import com.google.auto.value.AutoValue;
 import java.util.Date;
 
 @AutoValue
-@JsonDeserialize(builder = AutoValue_AppInfoRequest.class)
+@JsonDeserialize(builder = AutoValue_AppInfoRequest.Builder.class)
 public abstract class AppInfoRequest {
 
     @JsonProperty("app_id")

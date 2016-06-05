@@ -11,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
+import timber.log.Timber;
 
 @Module
 public class ApiModule {
@@ -19,10 +20,8 @@ public class ApiModule {
     @Singleton
     @NonNull
     public OkHttpClient provideOkHttpClient() {
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        return new OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build();
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(message -> Timber.d(message));
+        return new OkHttpClient.Builder().addInterceptor(logging).build();
     }
 
     @Provides

@@ -1,20 +1,16 @@
 package com.observer.spb.observer.data.info;
 
-import android.os.Build;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 import com.observer.spb.observer.data.local.LocalStorage;
 
-import java.util.Random;
+import java.util.UUID;
 
 import rx.Single;
 
 import static android.text.TextUtils.isEmpty;
 
-/**
- * Handles uniq AppId. Will create id at first request and save it in local storage.
- */
 public class AppIdGenerator {
 
     @NonNull
@@ -36,7 +32,7 @@ public class AppIdGenerator {
     @NonNull
     private Single<String> generateNewId() {
         // TODO: is it good enough?
-        return Single.fromCallable(() -> Build.SERIAL + (new Random().nextInt(10000)))
+        return Single.fromCallable(() -> UUID.randomUUID().toString())
                 .flatMap(id -> localStorage.saveAppId(id).map(whatever -> id));
     }
 }
